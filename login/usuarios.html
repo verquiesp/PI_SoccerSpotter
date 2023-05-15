@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dashboard - Admin</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="../admin/index_admin.html">Soccer Spotter</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="../login/password.html">Cambiar contraseña</a></li>
+                      <li><hr class="dropdown-divider" /></li>
+                      <li><a class="dropdown-item" href="../index.html">Cerrar sesión</a></li>
+                  </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <!---------------------------MENU LATERAL IZQUIERDO--------------------->
+                            <!--Inicio-->
+                            <div class="sb-sidenav-menu-heading">MENU</div>
+                            <a class="nav-link" href="../admin/index_admin.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Escritorio
+                            </a>
+                            <!--Mis jugadores-->
+                            <div class="sb-sidenav-menu-heading">JUGADORES</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Jugadores
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="../admin/alta_jugador.html">Alta jugador</a>
+                                    <a class="nav-link" href="../admin/listado_jugadores.html">Listado jugadores</a>
+                                    <a class="nav-link" href="../admin/busquedas.html">Búsqueda</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Equipos
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link" href="../admin/listado_equipos.html">Listado equipos</a>
+                                    <a class="nav-link" href="../admin/listado_categorias.html">Listado categorías</a>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading">Administración</div>
+                            <a class="nav-link" href="../login/alta_usuario.html">
+                              <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                              Alta usuario
+                          </a>
+                          <a class="nav-link" href="../login/usuarios.html">
+                              <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                              Listado usuarios
+                          </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Soccer Spotter
+                    </div>
+                </nav>
+            </div>
+            <!-- HASTA AQUÍ ESTÁ REVISADO Y ES IGUAL PARA TODAS LAS PÁGINAS DE ADMIN------------------------------------------------------------------------------------------->
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Usuarios</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Listado de los usuarios registrados</li>
+                        </ol>
+                        <div class="row">
+                            <table id="datatablesSimple">
+                                <thead>
+                                  <tr>
+                                    <th>ID del Usuario</th>
+                                    <th>Nombre del Usuario</th>
+                                    <th>Apellidos del Usuario</th>
+                                    <th>Email del Usuario</th>
+                                    <th>Contraseña del Usuario</th>
+                                  </tr>
+                                </thead>
+                                <tfoot>
+                                  <tr>
+                                    <th>ID del Usuario</th>
+                                    <th>Nombre del Usuario</th>
+                                    <th>Apellidos del Usuario</th>
+                                    <th>Email del Usuario</th>
+                                    <th>Contraseña del Usuario</th>
+                                  </tr>
+                                </tfoot>
+                                <tbody>
+                                    <th>xxx</th>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Email</th>
+                                    <th>Contraseña</th>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </main>
+                <!-- PIE DE PÁGINA IGUAL PARA TODAS LAS PÁGINAS ------------------------------------>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Soccer Spotter 2023</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+              $.ajax({
+                url: "/conexion/listado.php",
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+                  for (var i = 0; i < response.length; i++) {
+                    var jugador = response[i];
+                    var fila = "<tr>" +
+                      "<td>" + jugador.IDJugador + "</td>" +
+                      "<td>" + jugador.NombreJugador + "</td>" +
+                      "<td>" + jugador.ApellidoJugador + "</td>" +
+                      "<td>" + jugador.EdadJugador + "</td>" +
+                      "<td>" + jugador.NombreEquipo + "</td>" +
+                      "<td>" + jugador.NombreCiudad + "</td>" +
+                      "<td>" + '<button class="modificar" data-id="' + jugador.IDJugador + '">Modificar</button>' +
+                      '<button class="borrar" data-id="' + jugador.IDJugador + '">Borrar</button>' + "</td>" +
+                      "</tr>";
+                    $("#miTabla tbody").append(fila);
+                  }
+                  $("#miTabla").DataTable({
+                    paging: true, // activa paginación
+                    pageLength: 5, // cantidad de registros por página
+                    lengthMenu: [5, 15, 25, 50], // opciones de cantidad de registros por página
+                    order: [
+                      [0, "asc"]
+                    ], // ordena por defecto por la primera columna (id del Jugador)
+                    searching: true, // habilita la búsqueda
+                  });
+          
+                  // Evento para el botón de modificar
+                  $("#miTabla").on("click", ".modificar", function() {
+                    var idjugador = $(this).data("id");
+                    var url = "modificar.php?IDJugador=" + encodeURIComponent(idjugador);
+                    // Redireccionar a la página de modificación con el ID del jugador
+                    window.location.href = url;
+                  });
+          
+                  // Evento para el botón de borrar
+                  $("#miTabla").on("click", ".borrar", function() {
+                    var idjugador = $(this).data("id");
+                    if (confirm("¿Está seguro de que desea borrar este jugador?")) {
+                      // Realizar una petición AJAX para borrar el jugador de la base de datos
+                      $.ajax({
+                        url: "/funcionalidad/borrar.js",
+                        type: "POST",
+                        data: {
+                          idjugador: idjugador
+                        },
+                        success: function(response) {
+                          alert("Jugador borrado correctamente");
+                          // Recargar la página para actualizar la tabla
+                          location.reload();
+                        },
+                        error: function(xhr, status, error) {
+                          alert("Error al borrar el jugador: " + error);
+                        },
+                      });
+                    }
+                  });
+                },
+                error: function(xhr, status, error) {
+                  alert("Error al cargar los datos de la tabla: " + error);
+                },
+              });
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="../assets/demo/chart-area-demo.js"></script>
+        <script src="../assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="../js/datatables-simple-demo.js"></script>
+    </body>
+</html>
