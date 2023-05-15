@@ -97,33 +97,54 @@
             <!-- HASTA AQUÍ ESTÁ REVISADO Y ES IGUAL PARA TODAS LAS PÁGINAS DE ADMIN------------------------------------------------------------------------------------------->
             <div id="layoutSidenav_content">
                 <main>
-                    <div id="data"></div>
-                    <p>
-                        <button class="users">Obtener usuario</button>
-                        <button class="fotos">Obtener Fotos</button>
-                    </p>
-                    <div class="ouput">
-                        <ul class="lista_usuarios">
-                        </ul>
-                        <ul class="lista_fotos">
-                        </ul>
-                    </div>
-                    <div class="profile">
-                        <h3>DATOS DE LA PERSONA SELECCIONADA</h3>
-                        <div class="personal_file">
-                
+                    <br>
+                    <div class="row">
+                        <div class="container-fluid px-4">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-primary" id="goleadores">Máximos goleadores</button>
+                                <button type="button" class="btn btn-primary" id="asistentes">Máximo asistentes</button>
+                              
+                                <div class="btn-group" role="group">
+                                  <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Clasificaciones
+                                  </button>
+                                  <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                    <li><a class="dropdown-item" type="button" id="premierLeague">Premier League</a></li>
+                                    <li><a class="dropdown-item" type="button" id="ligaSantander">Liga Santander</a></li>
+                                    <li><a class="dropdown-item" type="button" id="bundesliga">Bundesliga</a></li>
+                                    <li><a class="dropdown-item" type="button" id="serieA">Serie A</a></li>
+                                    <li><a class="dropdown-item" type="button" id="ligue1">Ligue 1</a></li>
+                                  </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div id="wg-api-football-standings"
-                        data-host="v3.football.api-sports.io"
-                        data-key="eef2e35318525c99cb43985ea590af22"
-                        data-league="39"
-                        data-team=""
-                        data-season="2021"
-                        data-theme=""
-                        data-show-errors="false"
-                        data-show-logos="true"
-                        class="wg_loader">
+                        <div class="container-fluid px-4">
+                            <table id="playerTable" class="table table-striped table-hover table-bordered table-primary">
+                              <thead>
+                                <tr class="table-info">
+                                  <th>Photo</th>
+                                  <th>Player</th>
+                                  <th>Team</th>
+                                  <th>Goals</th>
+                                  <th>Assists</th>
+                                </tr>
+                              </thead>
+                              <tbody id="tableBody"></tbody>
+                            </table>
+                          </div>                    
+                        </div>
+                        <div class="container-fluid px-4">
+                            <div id="wg-api-football-standings"
+                            data-host="v3.football.api-sports.io"
+                            data-key="eef2e35318525c99cb43985ea590af22"
+                            data-league="39"
+                            data-team=""
+                            data-season="2021"
+                            data-theme=""
+                            data-show-errors="false"
+                            data-show-logos="true"
+                            class="wg_loader">
+                        </div>
                     </div>
                 </main>
                 <!-- PIE DE PÁGINA IGUAL PARA TODAS LAS PÁGINAS ------------------------------------>
@@ -141,120 +162,12 @@
                 </footer>
             </div>
         </div>
+        <script src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
+        <script src="../js/dashboard_admin.js"></script>
         <script type="module" src="https://widgets.api-sports.io/2.0.3/widgets.js"></script>
-        <!--<script>
-            const dataDiv = $("#data");
-
-            fetch("https://v3.football.api-sports.io/players/squads?team=33", {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "v3.football.api-sports.io",
-                "x-rapidapi-key": "eef2e35318525c99cb43985ea590af22"
-            }
-            })
-            .then(response => {
-            return response.json();
-            })
-            .then(data => {
-            const table = $('<table>').addClass('table');
-            const headerRow = $('<tr>');
-            headerRow.append($('<th>').text('Team'));
-            headerRow.append($('<th>').text('Players'));
-            table.append(headerRow);
-            $.each(data.response, function(index, row) {
-                const tableRow = $('<tr>');
-                tableRow.append($('<td>').text(row.team.name));
-                const players = row.players.map(player => player.player_name).join(', ');
-                tableRow.append($('<td>').text(players));
-                table.append(tableRow);
-            });
-            dataDiv.html(table);
-            })
-            .catch(err => {
-            console.log(err);
-            });
-        </script>-->
-        <!--<script>
-            // Cuando el documento esté listo $(document).ready(function() {});
-            $(function () {
-    
-                $(".users").on('click', function (event) {
-                    $("ul.lista_usuarios").empty();
-                    $.ajax("https://jsonplaceholder.typicode.com/users", {
-                        dataType: 'json',
-                        success: function (data) {
-                            data.forEach(function (valor) {
-                                $("ul.lista_usuarios").append("<li><span class='oculto'>" + valor.id + "</span>"
-                                    + valor.name + "</li>");
-                            });
-                        },
-                        error: function (jqXHR, texStatus, error) {
-                            alert("Error:" + texStatus + " " + error);
-                        }
-                    });
-                });
-    
-                $(".fotos").on('click', function (event) {
-                    $("ul.lista_fotos").empty();
-                    $.ajax("https://jsonplaceholder.typicode.com/photos", {
-                        dataType: 'json',
-                        success: function (data) {
-                            for (i = 0; i < 3; i++) {
-                                $("ul.lista_fotos").append("<li class='elemento'><img src='" + data[i].thumbnailUrl + "' /></li>");
-                            }
-                        }
-    
-                    });
-                });
-    
-                //TIENE QUE SER DELEGADO YA QUE SE AÑADEN DESPUÉS
-                $("ul.lista_usuarios").on("mouseenter", "li", function (event) {
-                    let id = $(this).children("span").eq(0).text();
-                    let url = "https://jsonplaceholder.typicode.com/users?id=" + id;
-    
-                    $(this).addClass("selected");
-    
-                    $.ajax(url, {
-                        dataType: 'json',
-                        success: function (data) {
-                            let name = data[0].name;
-                            let username = data[0].username;
-                            let email = data[0].email;
-                            let phone = data[0].phone;
-                            let company = data[0].company.name;
-                            let web = data[0].website;
-                            let city = data[0].address.city;
-    
-                            $(".personal_file").html(
-                                "<p>" + name + "</p>" +
-                                "<p>" + username + "</p>" +
-                                "<p>" + email + "</p>" +
-                                "<p>" + phone + "</p>" +
-                                "<p>" + company + "</p>" +
-                                "<p>" + web + "</p>" +
-                                "<p>" + city + "</p>"
-                            );
-    
-                        },
-                        error: function (jqXHR, texStatus, error) {
-                            alert("Error:" + texStatus + " " + error);
-                        }
-    
-                    });
-    
-                });
-    
-                $("ul.lista_usuarios").on("mouseleave", "li", function (event) {
-                    $(this).removeClass("selected");
-                });
-            });
-    
-        </script>-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="../assets/demo/chart-area-demo.js"></script>
-        <script src="../assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="../js/datatables-simple-demo.js"></script>
     </body>
